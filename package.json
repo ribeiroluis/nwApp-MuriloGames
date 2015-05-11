@@ -1,6 +1,7 @@
 {
   "name": "nw-demo",
   "node-main": "",
+  "version": "1.0.1",
   "main": "index.html",
   "dependencies": {
     "mongodb": "~2.0",

@@ -1,3 +1,5 @@
+/* global toastr */
+/* global angular */
 var app = angular.module("app", ['ngResource', 'ngRoute']);
 
 toastr.options = {
@@ -16,4 +18,4 @@ toastr.options = {
   "hideEasing": "linear",
   "showMethod": "fadeIn",
   "hideMethod": "fadeOut"
-}
+};
