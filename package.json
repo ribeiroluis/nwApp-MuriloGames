@@ -8,8 +8,9 @@
     "mongojs": "*"
   },
   "window": {
+	"frame": false,
     "icon": "css/img/angularjs.png",
-    "toolbar": true,
+    "toolbar": false,
     "resizable": false,
     "width": 900,
     "height": 600,
