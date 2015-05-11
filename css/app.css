@@ -1,0 +1,13 @@
+body{
+    position: relative;
+}
+.menu{
+	background: red;
+	position: absolute;
+	width: 100px;
+	height: 100%;
+}
+.viewContainer{
+	background: blue;
+	margin-left: 100px;
+}
