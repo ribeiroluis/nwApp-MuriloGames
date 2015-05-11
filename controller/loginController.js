@@ -1,27 +1,26 @@
-/// <reference path="../js/connectionControl.js" />
+﻿/// <reference path="../js/connectionControl.js" />
 /// <reference path="../js/angular.js" />
 /// <reference path="../js/toastr.min.js" />
 
 window.app.controller("loginController", function ($scope, $location) {
-	$scope.go = function (path) {
-		debugger;
-		$scope.$parent.isAuth = true;
-		$scope.$parent.authSession = "Luis Ribeiro";
-		toastr.info("Logou");
-		$location.path(path);
-	};
-	
-	
-	/*var conn = new connectionControl();
-	
+	$("#user").focus();
+	var conn = new connectionControl();	
 	$scope.login = function () {
-		conn.findUser($scope.name, $scope.password, function(data){
-			console.log(data);
-			debugger;
-			$scope.logou = data;
-			$scope.$apply();
-		});
-	}*/
-
-
+		try{
+			$("#submitLoading").show();
+			conn.findUser(this.user, this.password, function(data){
+				$scope.$parent.isAuth = true;
+				$scope.$parent.authSession = data.name;
+				$("#submitLoading").hide();
+				$location.path("/home");
+				$scope.$apply();
+			}, function(){
+				$("#submitLoading").hide();
+				if(!$scope.$parent.isAuth)
+					toastr.error("Senha/Usuário inválidos");
+			});
+		}catch (error){
+			toastr.error(error);
+		}
+	};	
 });

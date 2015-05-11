@@ -2,6 +2,8 @@
 
 window.app.controller("indexController", function ($scope) {
 	$scope.headerSrc = "tmpl/header.html";
+	$scope.footerSrc = "tmpl/footer.html";
+	$scope.loadingTmp = "tmpl/loading.html";
 	$scope.appTitle = "MuriloGames";
 	$scope.isAuth = false;
 
@@ -9,8 +11,7 @@ window.app.controller("indexController", function ($scope) {
 		$(value.currentTarget).siblings('.active').toggleClass('active');
 	}
 	$scope.checkAuth = function () {
-		debugger;
-		if($scope.isAuth)
+		if ($scope.isAuth)
 			return true;
 	}
 });

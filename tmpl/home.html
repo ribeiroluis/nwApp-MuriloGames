@@ -1,12 +1,54 @@
-<div class="panel panel-default">
-  <!-- Default panel contents -->
-  <div class="panel-heading">Panel heading</div>
-  <div class="panel-body">
-    <h1>{{titulo}}</h1>
-    <div>
-      <span ng-repeat="item in data">{{item}}</span>
+<!-- Panel -->
+<div class="column-40 column-panel">
+  <div class="panel panel-default">
+    <div class="panel-body large-content">
+      <form class="form-horizontal" ng-submit="insertService()">
+        <div class="form-group">
+          <label for="service">Serviço:</label>
+          <input type="text" class="form-control" id="service" placeholder="ex.: Destrava, troca de leitor..." ng-model="service"
+          required>
+        </div>
+        <div class="form-group">
+          <label for="price">Preço:</label>
+          <input type="text" pattern="^\d+(\.|\,)\d{2}$" class="form-control" id="price" placeholder="ex.: 150,00" ng-model="price"
+          required>
+        </div>
+        <div class="form-group">
+          <label for="price">Pagamento:</label>
+          <select ng-model="selectedPayment" ng-options="payment.name for payment in payments" class="form-control"
+          required></select>
+        </div>
+        <button type="submit" class="btn btn-success">Salvar</button>
+        <div data-ng-include src="loadingTmp" hidden id="insertLoading"></div>
+      </form>
     </div>
   </div>
+</div>
+<div class="column-60 column-table panel panel-default">
   <!-- Table -->
-  <table class="table">...</table>
+  <table class="table">
+    <caption>
+      <h3>Vendas em: <span class="label label-info">{{date}}</span></h3>     
+     </caption>
+  </table>
+  <div style="height: 378px; overflow-x: auto;">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nº</th>
+          <th>Serviço</th>
+          <th>Valor</th>
+          <th>Pagamento</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="sold in services">
+          <th scope="row">{{sold.number}}</th>
+          <td>{{sold.service}}</td>
+          <td>{{sold.price | currency}}</td>
+          <td>{{sold.payment}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>  
 </div>

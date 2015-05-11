@@ -1,5 +1,10 @@
+#price{
+	width: 80px;
+}
+
 body{
-    position: relative;
+	position: relative;
+	background: rgba(31, 31, 31, 0.22);
 }
 .menu{
 	background: red;
@@ -10,4 +15,49 @@ body{
 .viewContainer{
 	background: blue;
 	margin-left: 100px;
+}
+.large-content{
+	overflow-y: auto;	
+	height: 450px;
+}
+.footer {
+	padding: 5px;
+	bottom: 0;
+	color: white;
+	background-color: #2A2A2A;
+	border-radius: 5px;
+	text-align: right;
+	position: fixed;
+	width: 100%;
+	margin: 0 5 5 5;
+}
+.view-content{
+	margin: -15px 5px -15px 5px;
+}
+.navbar.navbar-inverse{
+	margin: 5px 5px 20px 5px;
+}
+.form-group > input{
+	width: 300px!important;
+}
+.form-group > select{
+	width: 300px!important;
+}
+.form-horizontal{
+	padding: 5px;
+}
+.column-40{
+	width: 40%;	
+}
+.column-60{
+	width: 60%;	
+}
+.column-panel{
+	float: left;
+}
+.column-table{
+	float: right;  
+	position: relative;
+	bottom: 0;
+	overflow: auto;
 }

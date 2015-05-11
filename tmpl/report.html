@@ -1,6 +1,39 @@
-<div class="panel-body">
-	<h1>{{titulo}}</h1>
-	<div>
-		<span ng-repeat="item in data">{{item}}</span>
-	</div>
+﻿<div class="panel panel-default">
+  <div role="tabpanel">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active" ng-click="changeTab($event)">
+        <a href="" aria-controls="general" role="tab" data-toggle="tab">Geral</a>
+      </li>
+      <li role="presentation" ng-click="changeTab($event)">
+        <a href="" aria-controls="service" role="tab" data-toggle="tab">Serviço</a>
+      </li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <form class="form-inline" ng-submit="searchData()" style="padding: 15px">
+        <div class="form-group">
+          <label for="datapicker">Data inicial:</label>
+          <input type="date" class="form-control" id="startDate" ng-model="startDate" style="width: 150px !important"></input>
+        </div>
+        <div class="form-group">
+          <label for="datapicker">Data final:</label>
+          <input type="date" class="form-control" id="endDate" ng-model="endDate" style="width: 150px !important"></input>
+        </div>
+        <button type="submit" class="btn btn-success">Buscar</button>
+        <div data-ng-include src="loadingTmp" hidden id="reportLoading"></div>
+      </form>
+      <div role="tabpanel" class="tab-pane active" id="general">
+        <div ng-repeat="type in Data">
+          <h4 class="fadeInDownBig">{{type.name}}:
+            <span class="label label-default">{{type.value | currency}}</span>
+          </h4>
+          <hr/>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="service">
+        <div>Sercicos</div>
+      </div>
+    </div>
+  </div>
 </div>

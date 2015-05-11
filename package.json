@@ -2,21 +2,21 @@
   "name": "nw-demo",
   "node-main": "",
   "main": "index.html",
-  "dependencies":{
-  	"mongodb": "~2.0",
-  	"mongoose": "*",
-  	"mongojs": "*"
+  "dependencies": {
+    "mongodb": "~2.0",
+    "mongoose": "*",
+    "mongojs": "*"
   },
   "window": {
-      "icon": "path/to/my/app.png",
-        "toolbar": true,
-        "resizable": false,
-        "width": 800,
-        "height": 600,
-        "min_width": 600,
-        "min_height": 400,
-        "max_width": 800,
-        "max_height": 600,
-        "position": "center"
-    }
+    "icon": "css/img/angularjs.png",
+    "toolbar": true,
+    "resizable": false,
+    "width": 900,
+    "height": 600,
+    "min_width": 600,
+    "min_height": 400,
+    "max_width": 900,
+    "max_height": 600,
+    "position": "center"
+  }
 }
