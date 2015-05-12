@@ -1,6 +1,16 @@
-﻿window.app.controller("homeController", function ($scope, $location) {
+﻿/* global toastr */
+window.app.controller("homeController", function ($scope, $location) {
 	$("#menuHome").toggleClass('active');
 	$("#service").focus();
+	$("#date").datepicker({
+		onSelect:function(){
+			getServices();
+		}
+	});
+	setTimeout(function() {
+		$("#date").datepicker( "setDate", new Date().toLocaleDateString() );		
+	}, 1);
+	
 
 	var conn = new connectionControl();
 	$scope.titulo = "Inicio";
@@ -31,13 +41,15 @@
 	$scope.insertService = function () {
 		try {
 			$("#insertLoading").show();
+			debugger;
+			var date = $("#date").datepicker("getDate");			
 			var service = {
 				number: $scope.countServices + 1,
 				price: Number(this.price.replace(/,/g, '.')),
 				service: this.service.toUpperCase(),
 				payment: this.selectedPayment.name,
 				date: new Date()
-			}
+			};
 			var confirmSubmit = confirm("Confirmar inclusão?");
 			if (confirmSubmit == true) {
 				conn.insertService([service], function (success) {

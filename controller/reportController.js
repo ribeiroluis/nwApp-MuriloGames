@@ -29,24 +29,19 @@ window.app.controller("reportController", function ($scope) {
 	var conn = new connectionControl();
 	$scope.Data = [];
 
-	$scope.searchData = function () {		
+	$scope.searchGeneralData = function () {		
 		try {
 			debugger;
 			$("#reportLoading").show();
-			if (this.startDate == this.endDate) {
-				conn.getServicesFromDate(this.startDate, function (data) {
+				var _startDate = $("#startDate").datepicker("getDate");
+				var _endDate = $("#endDate").datepicker("getDate");
+				var startDate = new Date(_startDate.getFullYear(), _startDate.getMonth(), _startDate.getDate(), 0, 0, 0);
+				var endDate = new Date(_endDate.getFullYear(), _endDate.getMonth(), _endDate.getDate(), 23, 59, 59);
+				conn.getServicesFromDate(startDate, endDate, function (data) {
 					groupData(data);
 					$scope.$apply();
 					$("#reportLoading").hide();
 				});
-			} else {
-				conn.getAllServices(function (data) {
-					
-					groupData(data);					
-					$scope.$apply();
-					$("#reportLoading").hide();
-				});
-			}
 		} catch (error) {
 			$("#reportLoading").hide();
 		}

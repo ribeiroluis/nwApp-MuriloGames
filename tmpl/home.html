@@ -18,6 +18,10 @@
           <select ng-model="selectedPayment" ng-options="payment.name for payment in payments" class="form-control"
           required></select>
         </div>
+        <div class="form-group">
+          <label for="date">Data:</label>
+          <input type="text" class="form-control fadeInDownBig" id="date" ng-model="date" style="width: 150px !important"></input>
+        </div>
         <button type="submit" class="btn btn-success">Salvar</button>
         <div data-ng-include src="loadingTmp" hidden id="insertLoading"></div>
       </form>
@@ -28,8 +32,10 @@
   <!-- Table -->
   <table class="table">
     <caption>
-      <h3>Vendas em: <span class="label label-info">{{date | date:'dd-MM-yyyy'}}</span></h3>     
-     </caption>
+      <h3>Vendas em:
+        <span class="label label-info">{{date | date:'dd-MM-yyyy'}}</span>
+      </h3>
+    </caption>
   </table>
   <div style="height: 378px; overflow-x: auto;">
     <table class="table">
@@ -50,5 +56,5 @@
         </tr>
       </tbody>
     </table>
-  </div>  
+  </div>
 </div>
