@@ -6,7 +6,7 @@
 	$scope.titulo = "Inicio";
 
 	$scope.payments = [{ "name": "Banca" }, { "name": "Banca Cartão" }, { "name": "Loja" }];
-	$scope.date = new Date().toLocaleDateString();
+	$scope.date = new Date();
 	$scope.totalSold = 0;
 	$scope.services = getServices();
 	$scope.countServices = countServices();
@@ -17,9 +17,12 @@
 			$scope.$apply();
 		});
 	}
-	
-	function getServices() {
-		conn.getServicesFromDate($scope.date, function (services) {
+
+	function getServices() {		
+		var startDate = new Date($scope.date.getFullYear(), $scope.date.getMonth(), $scope.date.getDate(), 0, 0, 0);
+		var endDate = new Date($scope.date.getFullYear(), $scope.date.getMonth(), $scope.date.getDate(), 23, 59, 59);
+
+		conn.getServicesFromDate(startDate, endDate, function (services) {
 			$scope.services = services;
 			$scope.$apply();
 		});
@@ -33,7 +36,7 @@
 				price: Number(this.price.replace(/,/g, '.')),
 				service: this.service.toUpperCase(),
 				payment: this.selectedPayment.name,
-				date: new Date().toLocaleDateString()
+				date: new Date()
 			}
 			var confirmSubmit = confirm("Confirmar inclusão?");
 			if (confirmSubmit == true) {
@@ -56,7 +59,5 @@
 		} catch (error) {
 			toastr.error("Algum campo não foi preenchido corretamente." + error.message);
 		}
-
-
 	}
 });

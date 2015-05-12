@@ -30,9 +30,13 @@ function connectionControl() {
 			}
 		});
 	};
-	var _getServicesFromDate = function (db, date, success) {
+	var _getServicesFromDate = function (db, startDate, endDate, success) {
 		var collection = db.collection('services');
-		collection.find({ "date": date }).toArray(function (err, docs) {
+		collection.find({ "date": {
+			$gte: startDate,
+			$lte: endDate
+		}
+		}).toArray(function (err, docs) {
 			assert.equal(err, null);
 			if (docs != null) {
 				db.close();
@@ -74,11 +78,11 @@ function connectionControl() {
 			_insertService(db, object, success, error);
 		});
 	};
-	this.getServicesFromDate = function (date, success) {
+	this.getServicesFromDate = function (startDate, endDate, success) {
 		MongoClient.connect(url, function (err, db) {
 			assert.equal(null, err);
 			console.log("Connected correctly to server");
-			_getServicesFromDate(db, date, success);
+			_getServicesFromDate(db, startDate, endDate, success);
 		});
 	};
 	this.countServices = function(success){
