@@ -61,3 +61,9 @@ body{
 	bottom: 0;
 	overflow: auto;
 }
+.label-report{
+	color: rgb(84, 218, 18);
+  	font-style: oblique;
+  	font-weight: bold;
+  	margin-left: 5px;
+}

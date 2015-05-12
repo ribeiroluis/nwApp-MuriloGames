@@ -9,9 +9,9 @@
     "mongojs": "*"
   },
   "window": {
-	"frame": false,
+	"frame": true,
     "icon": "css/img/angularjs.png",
-    "toolbar": false,
+    "toolbar": true,
     "resizable": false,
     "width": 900,
     "height": 600,

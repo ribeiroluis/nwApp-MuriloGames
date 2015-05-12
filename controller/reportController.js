@@ -1,10 +1,32 @@
-﻿window.app.controller("reportController", function ($scope) {
+﻿/// <reference path="../typings/lodash/lodash.d.ts"/>
+/* global connectionControl */
+/* global $ */
+window.app.controller("reportController", function ($scope) {
 	$("#menuReport").toggleClass('active');
-	$("#startDate").datepicker($.datepicker.regional["pt-br"]);
-	$("#endDate").datepicker($.datepicker.regional["pt-br"]);
+	debugger;
+	$("#startDate").datepicker({
+      numberOfMonths: 1,
+      onClose: function( selectedDate ) {
+        $( "#endDate" ).datepicker( "option", "minDate", selectedDate );
+      }
+    });
+    $("#endDate" ).datepicker({      
+      numberOfMonths: 1,
+      onClose: function( selectedDate ) {
+        $( "#startDate" ).datepicker( "option", "maxDate", selectedDate );
+      }
+    });
+	$scope.startDate = new Date().toLocaleDateString();
+	$scope.endDate = new Date().toLocaleDateString();
+	
+	setTimeout(function() {
+		$("#startDate").datepicker( "setDate", new Date().toLocaleDateString() );
+		$("#endDate").datepicker( "setDate", new Date().toLocaleDateString() );		
+	}, 1);
+	
+	
+	
 	var conn = new connectionControl();
-//	$scope.startDate = new Date().toLocaleDateString();
-//	$scope.endDate = new Date().toLocaleDateString();
 	$scope.Data = [];
 
 	$scope.searchData = function () {		
@@ -19,8 +41,8 @@
 				});
 			} else {
 				conn.getAllServices(function (data) {
-					var startDate = new Date(this.startDate);
-					var endDate = new Date(this.endDate);
+					
+					groupData(data);					
 					$scope.$apply();
 					$("#reportLoading").hide();
 				});
