@@ -23,16 +23,16 @@
         <button type="submit" class="btn btn-success">Buscar</button>
         <div data-ng-include src="loadingTmp" hidden id="reportLoading"></div>
       </form>
-      <div role="tabpanel" class="tab-pane active" id="general" class="fadeInDownBig">
-        <div ng-repeat="type in Data">
-          <h4 >{{type.name}}:
+      <div role="tabpanel" class="tab-pane active" id="general">
+        <div>
+          <h4 ng-repeat="type in Data" class="fadeInDownBig">{{type.name}}:
             <span class="label-report">{{type.value | currency}}</span>
-          </h4>
-          <hr/>
+            <hr/>
+          </h4>          
         </div>
-      </div>
+        </div>        
       <div role="tabpanel" class="tab-pane" id="service">
-        <div>Sercicos</div>
+          <div id="generalChart" style="height:80%; margin: 0 auto"></div>        
       </div>
     </div>
   </div>

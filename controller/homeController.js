@@ -1,10 +1,14 @@
 ﻿/* global toastr */
 window.app.controller("homeController", function ($scope, $location) {
+	"use strict",
+	
 	$("#menuHome").toggleClass('active');
 	$("#service").focus();
 	$("#date").datepicker({
 		onSelect:function(){
-			getServices();
+			var date = new Date($("#date").datepicker("getDate"));
+			$scope.date = date;
+			getServices();			
 		}
 	});
 	setTimeout(function() {
@@ -14,17 +18,17 @@ window.app.controller("homeController", function ($scope, $location) {
 
 	var conn = new connectionControl();
 	$scope.titulo = "Inicio";
-
 	$scope.payments = [{ "name": "Banca" }, { "name": "Banca Cartão" }, { "name": "Loja" }];
 	$scope.date = new Date();
 	$scope.totalSold = 0;
 	$scope.services = getServices();
 	$scope.countServices = countServices();
+	$scope.enableDate = false;
 
 	function countServices() {
 		conn.countServices(function (count) {
 			$scope.countServices = count;
-			$scope.$apply();
+			$scope.$apply();			
 		});
 	}
 
@@ -35,20 +39,28 @@ window.app.controller("homeController", function ($scope, $location) {
 		conn.getServicesFromDate(startDate, endDate, function (services) {
 			$scope.services = services;
 			$scope.$apply();
+			$("#date").datepicker( "setDate", $scope.date.toLocaleDateString() );
 		});
 	}
 
 	$scope.insertService = function () {
 		try {
-			$("#insertLoading").show();
 			debugger;
-			var date = $("#date").datepicker("getDate");			
+			
+			var date;
+			if($scope.enableDate){
+				date = $("#date").datepicker("getDate");				
+			}else{
+				date = new Date();
+				$scope.date = date;
+			}
+			$("#insertLoading").show();
 			var service = {
 				number: $scope.countServices + 1,
 				price: Number(this.price.replace(/,/g, '.')),
 				service: this.service.toUpperCase(),
 				payment: this.selectedPayment.name,
-				date: new Date()
+				date: date
 			};
 			var confirmSubmit = confirm("Confirmar inclusão?");
 			if (confirmSubmit == true) {

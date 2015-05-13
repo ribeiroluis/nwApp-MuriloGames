@@ -67,3 +67,25 @@ body{
   	font-weight: bold;
   	margin-left: 5px;
 }
+.checkboxDate{
+	width: 15px !important;
+  	height: 15px;
+  	display: inline;
+}
+.dateHome{
+	width: 30% !important;
+  	display: inline
+}
+.tab-pane{
+	height: 330px;
+}
+.column-30{
+	width: 30%;
+}
+.column-70{
+	width: 70%;
+}
+.tab-pane-column{
+	height: 100%;  	
+  	border-right: 1px solid #DBCCCD;
+}

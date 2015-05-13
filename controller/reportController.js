@@ -2,8 +2,9 @@
 /* global connectionControl */
 /* global $ */
 window.app.controller("reportController", function ($scope) {
-	$("#menuReport").toggleClass('active');
-	debugger;
+	"use strict",
+		
+	$("#menuReport").toggleClass('active');	
 	$("#startDate").datepicker({
       numberOfMonths: 1,
       onClose: function( selectedDate ) {
@@ -16,22 +17,17 @@ window.app.controller("reportController", function ($scope) {
         $( "#startDate" ).datepicker( "option", "maxDate", selectedDate );
       }
     });
-	$scope.startDate = new Date().toLocaleDateString();
-	$scope.endDate = new Date().toLocaleDateString();
-	
 	setTimeout(function() {
 		$("#startDate").datepicker( "setDate", new Date().toLocaleDateString() );
 		$("#endDate").datepicker( "setDate", new Date().toLocaleDateString() );		
 	}, 1);
 	
-	
-	
+	$scope.titulo = "Relatórios";
 	var conn = new connectionControl();
 	$scope.Data = [];
 
 	$scope.searchGeneralData = function () {		
 		try {
-			debugger;
 			$("#reportLoading").show();
 				var _startDate = $("#startDate").datepicker("getDate");
 				var _endDate = $("#endDate").datepicker("getDate");
@@ -48,6 +44,11 @@ window.app.controller("reportController", function ($scope) {
 	}
 
 	function groupData(data) {
+		$scope.services = _.groupBy(data,function(obj){
+			return obj.service; 
+		});
+		debugger;
+		
 		var total = _.sum(data, function (object) {
 			return object.price;
 		});
@@ -76,9 +77,54 @@ window.app.controller("reportController", function ($scope) {
 		}) },
 		];
 	}
-	$scope.titulo = "Relatórios";
+	
+	
 	$scope.changeTab = function (value) {
 		$("#" + value.target.attributes[1].nodeValue).siblings('.active').toggleClass('active');
 		$("#" + value.target.attributes[1].nodeValue).toggleClass('active')
 	}
+	
+	$('#generalChart').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: 'Vendas por forma de pagamento no período'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point}</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point}',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Browser share',
+            data: [
+                ['Firefox',   45.0],
+                ['IE',       26.8],
+                {
+                    name: 'Chrome',
+                    y: 12.8,
+                    sliced: true,
+                    selected: true
+                },
+                ['Safari',    8.5],
+                ['Opera',     6.2],
+                ['Others',   0.7]
+            ]
+        }]
+    });
 });

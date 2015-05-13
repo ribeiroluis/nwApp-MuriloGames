@@ -3,6 +3,8 @@
 /// <reference path="../js/toastr.min.js" />
 
 window.app.controller("loginController", function ($scope, $location) {
+	"use strict",
+	
 	$("#user").focus();
 	var conn = new connectionControl();	
 	$scope.login = function () {

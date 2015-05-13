@@ -19,8 +19,9 @@
           required></select>
         </div>
         <div class="form-group">
-          <label for="date">Data:</label>
-          <input type="text" class="form-control fadeInDownBig" id="date" ng-model="date" style="width: 150px !important"></input>
+          <input type="checkbox" class="checkboxDate form-control" style="width: 15px !important" id="checkDate" ng-model="enableDate"></input>
+          <label for="checkDate">Data:</label>
+          <input type="text" class="form-control dateHome" style="width: 30% !important" id="date" ng-model="date" ng-disabled="!enableDate"></input>
         </div>
         <button type="submit" class="btn btn-success">Salvar</button>
         <div data-ng-include src="loadingTmp" hidden id="insertLoading"></div>
