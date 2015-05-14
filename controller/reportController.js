@@ -41,7 +41,7 @@ window.app.controller("reportController", function ($scope) {
 		} catch (error) {
 			$("#reportLoading").hide();
 		}
-	}
+	};
 
 	function groupData(data) {
 		$scope.services = _.groupBy(data,function(obj){
@@ -76,49 +76,35 @@ window.app.controller("reportController", function ($scope) {
 			return object.price;
 		}) },
 		];
-	}
+	};
 	
 	
 	$scope.changeTab = function (value) {
 		$("#" + value.target.attributes[1].nodeValue).siblings('.active').toggleClass('active');
-		$("#" + value.target.attributes[1].nodeValue).toggleClass('active')
+		$("#" + value.target.attributes[1].nodeValue).toggleClass('active');
 		generateChart();
-	}
+	};
 	
-	function generateChart() {
+	function generateChart(title, name, data) {
 		$('#generalChart').highcharts({
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-			type: 'column'
+		credits: {
+            href: ''
         },
+        chart: {            
+			type: 'column'
+		},
         title: {
 			style: {
-				"font-size": "10px",
-				"display": "inline-block",
-				"max-width": "100%",
-				"margin-bottom": "5px",
-				"font-weight":" 700"			
+				"font-size": "10px",							
 			},
-            text: 'Vendas por forma de pagamento no período'
+            text: title
         },
         tooltip: {
             pointFormat: '<b>{series.name}</b>'
-        },
-        plotOptions: {
-           
-        },
-        series: [{            
-            name: 'Browser share',
-            data: [
-                ['Firefox',   45.0],
-                ['IE',       26.8],
-                ['Chrome',12.8],
-                ['Safari',    8.5],
-                ['Opera',     6.2],
-                ['Others',   0.7]
-            ]
+        },        
+        series: [{
+			name: name,        
+            data: data
         }]
     });	
 	}
