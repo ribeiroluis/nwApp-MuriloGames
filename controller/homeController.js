@@ -5,6 +5,7 @@ window.app.controller("homeController", function ($scope, $location) {
 	$("#menuHome").toggleClass('active');
 	$("#service").focus();
 	$("#date").datepicker({
+		maxDate: 0,
 		onSelect:function(){
 			var date = new Date($("#date").datepicker("getDate"));
 			$scope.date = date;

@@ -82,49 +82,50 @@ window.app.controller("reportController", function ($scope) {
 	$scope.changeTab = function (value) {
 		$("#" + value.target.attributes[1].nodeValue).siblings('.active').toggleClass('active');
 		$("#" + value.target.attributes[1].nodeValue).toggleClass('active')
+		generateChart();
 	}
 	
-	$('#generalChart').highcharts({
+	function generateChart() {
+		$('#generalChart').highcharts({
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
-            plotShadow: false
+            plotShadow: false,
+			type: 'column'
         },
         title: {
+			style: {
+				"font-size": "10px",
+				"display": "inline-block",
+				"max-width": "100%",
+				"margin-bottom": "5px",
+				"font-weight":" 700"			
+			},
             text: 'Vendas por forma de pagamento no período'
         },
         tooltip: {
-            pointFormat: '{series.name}: <b>{point}</b>'
+            pointFormat: '<b>{series.name}</b>'
         },
         plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point}',
-                    style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    }
-                }
-            }
+           
         },
-        series: [{
-            type: 'pie',
+        series: [{            
             name: 'Browser share',
             data: [
                 ['Firefox',   45.0],
                 ['IE',       26.8],
-                {
-                    name: 'Chrome',
-                    y: 12.8,
-                    sliced: true,
-                    selected: true
-                },
+                ['Chrome',12.8],
                 ['Safari',    8.5],
                 ['Opera',     6.2],
                 ['Others',   0.7]
             ]
         }]
-    });
+    });	
+	}
+	
+	
+	
+	
+	
+	
 });
