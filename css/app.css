@@ -18,10 +18,10 @@ body{
 }
 .large-content{
 	overflow-y: auto;	
-	height: 450px;
+	height: 500px;
 }
 .tabContent{
-    height: 330px;
+    height: 400px;
     overflow-y: auto;
     padding: 5px;
 }
@@ -82,7 +82,7 @@ body{
   	display: inline
 }
 .tab-pane{
-	height: 330px;
+	height: 350px;
 }
 .column-30{
 	width: 30%;

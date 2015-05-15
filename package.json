@@ -11,12 +11,12 @@
   "window": {
 	"frame": true,
     "icon": "css/img/angularjs.png",
-    "toolbar": true,
+    "toolbar": false,
     "resizable": false,
     "width": 900,
     "height": 600,
-    "min_width": 600,
-    "min_height": 400,
+    "min_width": 900,
+    "min_height": 600,
     "max_width": 900,
     "max_height": 600,
     "position": "center"
