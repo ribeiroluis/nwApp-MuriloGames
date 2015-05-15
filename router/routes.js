@@ -5,10 +5,10 @@ window.app.config(function($routeProvider) {
 	}).when('/report', {
 		templateUrl : 'tmpl/report.html',
 		controller : 'reportController'
-	}).otherwise({
+	}).otherwise({		
 		templateUrl : 'tmpl/login.html',
 		controller : 'loginController'
-	})
+	});
 //	.otherwise({
 //		redirectTo : '/home'
 //	});

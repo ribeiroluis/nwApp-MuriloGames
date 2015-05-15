@@ -20,18 +20,28 @@
           <label for="datapicker">até:</label>
           <input type="text" class="form-control" id="endDate" ng-model="endDate" style="width: 150px !important"></input>
         </div>
+        <div class="form-group">
+          <label>Relatório:</label>
+          <select ng-model="selectedReport" class="form-control" ng-options="report.title for report in reportView" ng-change="changeReport(selectedReport)"></select>  
+        </div>
         <button type="submit" class="btn btn-success">Buscar</button>
         <div data-ng-include src="loadingTmp" hidden id="reportLoading" style="float: right;  margin: -10px 150px 0px 0px;"></div>
       </form>
       <div role="tabpanel" class="tab-pane active" id="general">
         <div>
-          <h4 ng-repeat="type in Data" class="fadeInDownBig">{{type.name}}:
+          <h4 class="fadeInDownBig" ng-show="{{(total!=undefined) ? true : false}}">Total:
+            <span class="label-report">{{total | currency}}</span>
+            <hr/>
+          <h4 ng-repeat="type in selectedReport.data" class="fadeInDownBig">{{type.name}}:
             <span class="label-report">{{type.value | currency}}</span>
             <hr/>
           </h4>          
         </div>
         </div>        
       <div role="tabpanel" class="tab-pane" id="service">
+        
+        
+        
         <div id="generalChart" style="margin: 0 auto; height: 330px; width: 880px" ></div>
       </div>
     </div>

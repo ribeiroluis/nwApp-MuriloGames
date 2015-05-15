@@ -19,8 +19,30 @@ function connectionControl() {
 			}
 		});
 	};
+	var _findUsers = function (db, success, error) {
+		var cursor = db.collection('users').find({});
+		cursor.each(function (err, doc) {
+			if (doc != null) {
+				success(doc);
+				db.close();
+			} else {
+				error();
+			}
+		});
+	};
 	var _insertService = function (db, object, success, error) {
 		var collection = db.collection('services');
+		collection.insert(object, function (err, result) {
+			if (result != null) {
+				success(result);
+				db.close();
+			} else {
+				error(err);
+			}
+		});
+	};
+	var _insertUser = function (db, object, success, error) {
+		var collection = db.collection('users');
 		collection.insert(object, function (err, result) {
 			if (result != null) {
 				success(result);
@@ -70,12 +92,25 @@ function connectionControl() {
 			_findUser(db, user, password, success, error);
 		});
 	};
-
+	this.findUsers = function (success, error) {
+		MongoClient.connect(url, function (err, db) {
+			assert.equal(null, err);
+			console.log("Connected correctly to server");
+			_findUsers(db, success, error);
+		});
+	};
 	this.insertService = function (object, success, error) {
 		MongoClient.connect(url, function (err, db) {
 			assert.equal(null, err);
 			console.log("Connected correctly to server");
 			_insertService(db, object, success, error);
+		});
+	};
+	this.insertUser = function (object, success, error) {
+		MongoClient.connect(url, function (err, db) {
+			assert.equal(null, err);
+			console.log("Connected correctly to server");
+			_insertUser(db, object, success, error);
 		});
 	};
 	this.getServicesFromDate = function (startDate, endDate, success) {
