@@ -28,20 +28,17 @@
         <div data-ng-include src="loadingTmp" hidden id="reportLoading" style="float: right;  margin: -10px 150px 0px 0px;"></div>
       </form>
       <div role="tabpanel" class="tab-pane active" id="general">
-        <div>
-          <h4 class="fadeInDownBig" ng-show="{{(total!=undefined) ? true : false}}">Total:
-            <span class="label-report">{{total | currency}}</span>
+        <div class="tabContent">
+          <h4 class="fadeInDownBig">Total:
+            <span class="label-report">{{selectedReport.total | currency}}</span>
             <hr/>
-          <h4 ng-repeat="type in selectedReport.data" class="fadeInDownBig">{{type.name}}:
-            <span class="label-report">{{type.value | currency}}</span>
+          <h4 ng-repeat="type in selectedReport.data" class="fadeInDownBig">{{type[0]}}:
+            <span class="label-report">{{type[1] | currency}}</span>
             <hr/>
           </h4>          
         </div>
         </div>        
       <div role="tabpanel" class="tab-pane" id="service">
-        
-        
-        
         <div id="generalChart" style="margin: 0 auto; height: 330px; width: 880px" ></div>
       </div>
     </div>

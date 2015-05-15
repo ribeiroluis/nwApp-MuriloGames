@@ -36,7 +36,6 @@ window.app.controller("reportController", function ($scope) {
 	$scope.searchGeneralData = function () {
 		try {
 			$("#reportLoading").show();
-			$scope.total = undefined;
 			var _startDate = $("#startDate").datepicker("getDate");
 			var _endDate = $("#endDate").datepicker("getDate");
 			var startDate = new Date(_startDate.getFullYear(), _startDate.getMonth(), _startDate.getDate(), 0, 0, 0);
@@ -52,7 +51,7 @@ window.app.controller("reportController", function ($scope) {
 	};
 
 	function groupData(data) {
-		$scope.total = _.sum(data, function (object) {
+		$scope.selectedReport.total = _.sum(data, function (object) {
 			return object.price;
 		});
 		var _type = $scope.selectedReport.type;		
@@ -68,8 +67,8 @@ window.app.controller("reportController", function ($scope) {
 		_.forEach(_data, function (n, k) {
 			$scope.selectedReport.data.push([k, _.sum(n, function (object) { return object.price; })]);
 		});		
-		debugger;
 		generateChart(_data);
+		debugger;
 	};
 
 
@@ -84,7 +83,6 @@ window.app.controller("reportController", function ($scope) {
 	};
 
 	function generateChart(_data) {
-		debugger;
 		var _type = $scope.selectedReport.type;
 		Highcharts.setOptions({
 			lang: {

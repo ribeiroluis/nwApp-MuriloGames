@@ -9,7 +9,7 @@ function connectionControl() {
 	var url = 'mongodb://localhost:27017/murilogames';
 
 	var _findUser = function (db, user, password, success, error) {
-		var cursor = db.collection('users').find({ "user": user, "password": CryptoJS.MD5(password).toString() });
+		var cursor = db.collection('users').find({ "user": user, "password": password });
 		cursor.each(function (err, doc) {
 			if (doc != null) {
 				success(doc);
@@ -20,14 +20,15 @@ function connectionControl() {
 		});
 	};
 	var _findUsers = function (db, success, error) {
-		var cursor = db.collection('users').find({});
-		cursor.each(function (err, doc) {
-			if (doc != null) {
-				success(doc);
-				db.close();
-			} else {
-				error();
-			}
+		var collection = db.collection('users');
+		collection.count(function(err, count) {
+			assert.equal(err, null);
+			if(count != null)
+				success(count);
+			else
+				error(err);
+				
+			db.close();
 		});
 	};
 	var _insertService = function (db, object, success, error) {
@@ -121,7 +122,6 @@ function connectionControl() {
 		});
 	};
 	this.countServices = function(success){
-		//db.getCollection('services').count({})
 		MongoClient.connect(url, function (err, db) {
 			assert.equal(null, err);
 			console.log("Connected correctly to server");

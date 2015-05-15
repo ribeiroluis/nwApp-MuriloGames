@@ -20,6 +20,11 @@ body{
 	overflow-y: auto;	
 	height: 450px;
 }
+.tabContent{
+    height: 330px;
+    overflow-y: auto;
+    padding: 5px;
+}
 .footer {
 	padding: 5px;
 	bottom: 0;

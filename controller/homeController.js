@@ -45,9 +45,7 @@ window.app.controller("homeController", function ($scope, $location) {
 	}
 
 	$scope.insertService = function () {
-		try {
-			debugger;
-			
+		try {			
 			var date;
 			if($scope.enableDate){
 				date = $("#date").datepicker("getDate");				
